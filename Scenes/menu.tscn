@@ -18,49 +18,79 @@ offset_bottom = 1896.0
 texture = ExtResource("2_xhh6f")
 stretch_mode = 1
 
-[node name="Header" type="Label" parent="." unique_id=609608857]
+[node name="TopBar" type="ColorRect" parent="." unique_id=671202814]
 layout_mode = 0
-offset_left = 3.0
-offset_top = -1.0
-offset_right = 1078.0
-offset_bottom = 423.0
-theme_override_font_sizes/font_size = 57
-text = "ОМП
-Открытая Мобильная Платформа"
+offset_left = 2.000001
+offset_right = 1155.8492
+offset_bottom = 361.16666
+scale = Vector2(0.9359975, 1.2)
+color = Color(0.8156863, 0.5764706, 0.37254903, 1)
+
+[node name="OMPLabel" type="Label" parent="TopBar" unique_id=609608857]
+layout_mode = 0
+offset_left = 96.154106
+offset_top = 24.166664
+offset_right = 1072.154
+offset_bottom = 229.16666
+theme_override_font_sizes/font_size = 150
+text = "ОМП"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="Title" type="Label" parent="." unique_id=1750770182]
+[node name="PlatformLabel" type="Label" parent="TopBar" unique_id=438525144]
 layout_mode = 0
-offset_left = 110.0
-offset_top = 478.0
-offset_right = 1009.0
-offset_bottom = 1061.0
+offset_left = 162.39359
+offset_top = 244.16666
+offset_right = 1021.37024
+offset_bottom = 367.08344
+scale = Vector2(1, 0.7999995)
+theme_override_font_sizes/font_size = 50
+text = "Открытая мобильная платформа"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TitleContainer" type="VBoxContainer" parent="." unique_id=1689046207]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 500.0
+offset_right = 955.0
+offset_bottom = 941.0
+
+[node name="DBusLabel" type="Label" parent="TitleContainer" unique_id=1750770182]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.93333334, 1, 1, 1)
 theme_override_font_sizes/font_size = 160
-text = "D-Bus CIty"
+text = "D-Bus 
+CIty"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play" type="Button" parent="." unique_id=1636680174]
+[node name="ButtonsVBox" type="VBoxContainer" parent="." unique_id=1140664414]
 layout_mode = 0
-offset_left = 258.0
-offset_top = 1062.0
-offset_right = 874.0
-offset_bottom = 1276.0
+offset_left = 109.0
+offset_top = 1048.0
+offset_right = 1030.0
+offset_bottom = 1342.0
+theme_override_constants/separation = 25
+
+[node name="PlayButton" type="Button" parent="ButtonsVBox" unique_id=1636680174]
+layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "Играть"
 
-[node name="Quit" type="Button" parent="." unique_id=1885854976]
-layout_mode = 0
-offset_left = 256.0
-offset_top = 1304.0
-offset_right = 872.0
-offset_bottom = 1478.0
+[node name="AboutButton" type="Button" parent="ButtonsVBox" unique_id=1885854976]
+layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "Об игре"
 
-[node name="Down" type="Label" parent="." unique_id=2103443109]
+[node name="AuroraIcon" type="TextureRect" parent="." unique_id=855143626]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VersionLabel" type="Label" parent="." unique_id=2103443109]
 layout_mode = 0
 offset_left = 345.0
 offset_top = 1670.0
@@ -72,5 +102,10 @@ text = "ОС АВРОРА
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[node name="SettingsButton" type="TextureButton" parent="." unique_id=922206132]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="ButtonsVBox/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="ButtonsVBox/AboutButton" to="." method="_on_quit_pressed"]
