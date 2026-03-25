@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://4b7fcr5a4h0r"]
+
+[ext_resource type="Script" uid="uid://c6gsmig5oc4ae" path="res://Scripts/explanation.gd" id="1_at4u7"]
+[ext_resource type="Texture2D" uid="uid://csh2shy0krswi" path="res://Assets/city_background.jpg" id="2_ilxsi"]
+
+[node name="Control" type="Control" unique_id=1933202894]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_at4u7")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1858887250]
+modulate = Color(0.5400934, 0.4308048, 0.6178711, 1)
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("2_ilxsi")
+stretch_mode = 1
+
+[node name="Header" type="Label" parent="." unique_id=1674876538]
+layout_mode = 0
+offset_right = 1083.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 100
+text = "Название уровня"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExplanationText" type="Panel" parent="." unique_id=33722335]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 743.0
+offset_right = 1024.0
+offset_bottom = 1372.0
+
+[node name="Text" type="RichTextLabel" parent="ExplanationText" unique_id=364874778]
+layout_mode = 0
+offset_right = 956.0
+offset_bottom = 628.0
+theme_override_font_sizes/normal_font_size = 50
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextLevel" type="Button" parent="." unique_id=1898683997]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 1531.0
+offset_right = 884.0
+offset_bottom = 1742.0
+theme_override_font_sizes/font_size = 70
+text = "Дальше"
+
+[connection signal="pressed" from="NextLevel" to="." method="_on_next_level_pressed"]

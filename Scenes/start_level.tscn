@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cr3yopiluilr3"]
+
+[ext_resource type="Script" uid="uid://rggh2qxu0jif" path="res://Scripts/welcome.gd" id="1_aqoc6"]
+[ext_resource type="Texture2D" uid="uid://csh2shy0krswi" path="res://Assets/city_background.jpg" id="2_luvhh"]
+
+[node name="Control" type="Control" unique_id=597354461]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_aqoc6")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1162349704]
+modulate = Color(0.5400934, 0.4308048, 0.6178711, 1)
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("2_luvhh")
+stretch_mode = 1
+
+[node name="Header" type="Label" parent="." unique_id=1819264765]
+layout_mode = 0
+offset_right = 1072.0
+offset_bottom = 316.0
+theme_override_font_sizes/font_size = 150
+text = "D-Bus City"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Speaker" type="PanelContainer" parent="." unique_id=382429912]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 583.0
+offset_right = 1024.0
+offset_bottom = 1086.0
+
+[node name="Text" type="RichTextLabel" parent="Speaker" unique_id=1320273214]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="." unique_id=1730104596]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 1439.0
+offset_right = 828.0
+offset_bottom = 1594.0
+theme_override_font_sizes/font_size = 80
+text = "Продолжить"
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

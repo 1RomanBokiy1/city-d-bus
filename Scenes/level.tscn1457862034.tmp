@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bur24d2olbu1b"]
+
+[ext_resource type="Script" uid="uid://cik38u40bfy7c" path="res://Scripts/level.gd" id="1_tumq0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_51e2h"]
+
+[node name="Control" type="Control" unique_id=1601468074]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_tumq0")
+
+[node name="Header" type="Label" parent="." unique_id=1746857102]
+layout_mode = 0
+offset_right = 1079.0
+offset_bottom = 221.0
+theme_override_font_sizes/font_size = 100
+text = "ХАОС"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speaker" type="TextureRect" parent="." unique_id=798700507]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 613.0
+offset_right = 470.0
+offset_bottom = 1047.0
+texture = SubResource("ViewportTexture_51e2h")
+
+[node name="SpeakerText" type="Panel" parent="." unique_id=28151292]
+layout_mode = 0
+offset_left = 473.0
+offset_top = 617.0
+offset_right = 1045.0
+offset_bottom = 1055.0
+
+[node name="Text" type="Label" parent="SpeakerText" unique_id=287109624]
+layout_mode = 0
+offset_right = 563.0
+offset_bottom = 426.0
+theme_override_font_sizes/font_size = 60
+text = "Текст задачи"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChoicePanel" type="VBoxContainer" parent="." unique_id=1679612603]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 1306.0
+offset_right = 913.0
+offset_bottom = 1574.0
+
+[node name="Choice1" type="Button" parent="ChoicePanel" unique_id=826735450]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "1. Выбор 1"
+
+[node name="Choice2" type="Button" parent="ChoicePanel" unique_id=1724116711]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "2. Выбор 2"
+
+[connection signal="pressed" from="ChoicePanel/Choice1" to="." method="_on_choice_1_pressed"]
+[connection signal="pressed" from="ChoicePanel/Choice2" to="." method="_on_choice_2_pressed"]

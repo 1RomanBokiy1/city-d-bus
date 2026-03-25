@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bur24d2olbu1b"]
+
+[ext_resource type="Script" uid="uid://cik38u40bfy7c" path="res://Scripts/level.gd" id="1_tumq0"]
+[ext_resource type="Texture2D" uid="uid://csh2shy0krswi" path="res://Assets/city_background.jpg" id="2_k5f4k"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_51e2h"]
+
+[node name="Control" type="Control" unique_id=1601468074]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_tumq0")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1735263346]
+modulate = Color(0.5400934, 0.4308048, 0.6178711, 1)
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("2_k5f4k")
+stretch_mode = 1
+
+[node name="Header" type="Label" parent="." unique_id=1746857102]
+layout_mode = 0
+offset_right = 1079.0
+offset_bottom = 221.0
+theme_override_font_sizes/font_size = 100
+text = "Название уровня"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speaker" type="TextureRect" parent="." unique_id=798700507]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 613.0
+offset_right = 470.0
+offset_bottom = 1047.0
+texture = SubResource("ViewportTexture_51e2h")
+
+[node name="SpeakerText" type="Panel" parent="." unique_id=28151292]
+layout_mode = 0
+offset_left = 473.0
+offset_top = 617.0
+offset_right = 1045.0
+offset_bottom = 1055.0
+
+[node name="Text" type="RichTextLabel" parent="SpeakerText" unique_id=168288680]
+layout_mode = 0
+offset_right = 572.0
+offset_bottom = 442.0
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChoicePanel" type="VBoxContainer" parent="." unique_id=1679612603]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 1306.0
+offset_right = 913.0
+offset_bottom = 1574.0
+
+[node name="Choice1" type="Button" parent="ChoicePanel" unique_id=826735450]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "1. Выбор 1"
+autowrap_mode = 2
+
+[node name="Choice2" type="Button" parent="ChoicePanel" unique_id=1724116711]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "2. Выбор 2"
+autowrap_mode = 2
+
+[connection signal="pressed" from="ChoicePanel/Choice1" to="." method="_on_choice_1_pressed"]
+[connection signal="pressed" from="ChoicePanel/Choice2" to="." method="_on_choice_2_pressed"]

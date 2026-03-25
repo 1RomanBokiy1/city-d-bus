@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://7prbij2qnhe5"]
+
+[ext_resource type="Script" uid="uid://bur1ajbgtqrft" path="res://Scripts/menu.gd" id="1_1rerr"]
+[ext_resource type="Texture2D" uid="uid://csh2shy0krswi" path="res://Assets/city_background.jpg" id="2_xhh6f"]
+
+[node name="Control" type="Control" unique_id=828672909]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1rerr")
+
+[node name="Background" type="TextureRect" parent="." unique_id=959499154]
+modulate = Color(0.5400934, 0.4308048, 0.6178711, 1)
+layout_mode = 0
+offset_right = 1066.0
+offset_bottom = 1896.0
+texture = ExtResource("2_xhh6f")
+stretch_mode = 1
+
+[node name="Header" type="Label" parent="." unique_id=609608857]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 1078.0
+offset_bottom = 423.0
+theme_override_font_sizes/font_size = 57
+text = "ОМП
+Открытая Мобильная Платформа"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="." unique_id=1750770182]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 478.0
+offset_right = 1009.0
+offset_bottom = 1061.0
+theme_override_colors/font_color = Color(0.93333334, 1, 1, 1)
+theme_override_font_sizes/font_size = 160
+text = "D-Bus CIty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="." unique_id=1636680174]
+layout_mode = 0
+offset_left = 258.0
+offset_top = 1062.0
+offset_right = 874.0
+offset_bottom = 1276.0
+theme_override_font_sizes/font_size = 100
+text = "Играть"
+
+[node name="Quit" type="Button" parent="." unique_id=1885854976]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 1304.0
+offset_right = 872.0
+offset_bottom = 1478.0
+theme_override_font_sizes/font_size = 100
+text = "Об игре"
+
+[node name="Down" type="Label" parent="." unique_id=2103443109]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 1670.0
+offset_right = 802.0
+offset_bottom = 1846.0
+theme_override_font_sizes/font_size = 45
+text = "ОС АВРОРА
+Версия 1.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

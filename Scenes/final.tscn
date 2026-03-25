@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bk5aa280cjtne"]
+
+[ext_resource type="Script" uid="uid://clmijortgarq8" path="res://Scripts/final.gd" id="1_trmy6"]
+[ext_resource type="Texture2D" uid="uid://csh2shy0krswi" path="res://Assets/city_background.jpg" id="2_adj38"]
+
+[node name="Control" type="Control" unique_id=1054319000]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_trmy6")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1131361162]
+modulate = Color(0.5400934, 0.4308048, 0.6178711, 1)
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("2_adj38")
+stretch_mode = 1
+
+[node name="Panel" type="Panel" parent="." unique_id=1502118055]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 472.0
+offset_right = 1044.0
+offset_bottom = 1235.0
+
+[node name="Text" type="Label" parent="Panel" unique_id=744626895]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 1027.0
+offset_bottom = 771.0
+theme_override_font_sizes/font_size = 50
+text = "ТЕКСТ ФИНАЛА"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Menu" type="Button" parent="." unique_id=1670666245]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 1645.0
+offset_right = 957.0
+offset_bottom = 1793.0
+theme_override_font_sizes/font_size = 70
+text = "Завершить"
+
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]

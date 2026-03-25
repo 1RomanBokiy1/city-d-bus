@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b1vrhk18i1stb"]
+
+[ext_resource type="Script" uid="uid://dda2xikxk3o6x" path="res://Scripts/level_select.gd" id="1_1fiak"]
+[ext_resource type="Texture2D" uid="uid://csh2shy0krswi" path="res://Assets/city_background.jpg" id="2_nkys2"]
+
+[node name="Control" type="Control" unique_id=450012486]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1fiak")
+
+[node name="Background" type="TextureRect" parent="." unique_id=873965717]
+modulate = Color(0.5400934, 0.4308048, 0.6178711, 1)
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("2_nkys2")
+expand_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=934457988]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 233.0
+offset_right = 1012.0
+offset_bottom = 1798.0
+
+[node name="LevelsVBox" type="VBoxContainer" parent="ScrollContainer" unique_id=521769082]
+layout_mode = 2
+theme_override_constants/separation = 70
+alignment = 1
+
+[node name="Header" type="Label" parent="." unique_id=1076604708]
+layout_mode = 0
+offset_right = 1073.0
+offset_bottom = 236.0
+theme_override_font_sizes/font_size = 90
+text = "Выбор Уровня"
+horizontal_alignment = 1
+vertical_alignment = 1
