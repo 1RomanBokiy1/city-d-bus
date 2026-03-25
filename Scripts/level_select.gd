@@ -15,7 +15,7 @@ func _ready():
 		var btn = Button.new()
 		btn.text = str(i) + ". " + GameManager.levels_data[i].name
 		btn.custom_minimum_size = Vector2(720, 115)
-		btn.add_theme_font_size_override("font_size", 46)
+		btn.add_theme_font_size_override("font_size", 60)
 		
 		# Цвет текста всегда тёмный
 		btn.add_theme_color_override("font_color", Color(0.05, 0.05, 0.05))
