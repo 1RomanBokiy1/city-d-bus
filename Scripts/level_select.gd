@@ -4,8 +4,14 @@ extends Control
 @onready var vbox = $ScrollContainer/LevelsVBox
 @onready var background = $Background
 
-func _ready():
+func _ready() -> void:
 	background.modulate = Color(1, 1, 1, 0.95)
+
+	# Subtle entrance animation for list.
+	vbox.modulate.a = 0.0
+	var entrance = create_tween()
+	entrance.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	entrance.tween_property(vbox, "modulate:a", 1.0, 0.35)
 	
 	# Настраиваем ScrollContainer чтобы точно скроллился
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
@@ -16,6 +22,7 @@ func _ready():
 		btn.text = str(i) + ". " + GameManager.levels_data[i].name
 		btn.custom_minimum_size = Vector2(720, 115)
 		btn.add_theme_font_size_override("font_size", 60)
+		btn.modulate.a = 0.0
 		
 		# Цвет текста всегда тёмный
 		btn.add_theme_color_override("font_color", Color(0.05, 0.05, 0.05))
@@ -42,13 +49,22 @@ func _ready():
 		btn.add_theme_stylebox_override("hover", style_hover)
 		btn.add_theme_stylebox_override("pressed", style)
 		
-		# Замочек
+		# Locked state (no emoji; keep consistent UI).
 		if i > GameManager.unlocked_level:
 			btn.disabled = true
-			btn.text += "    🔒"
+			btn.text += "  (закрыто)"
+			btn.modulate.a = 0.55
+		else:
+			btn.modulate.a = 0.0
 		
-		btn.pressed.connect(_on_level_pressed.bind(i))
+		btn.pressed.connect(Callable(self, "_on_level_pressed").bind(i))
 		vbox.add_child(btn)
+
+		# Animate unlocked cards in.
+		if not btn.disabled:
+			var local_tween = create_tween()
+			local_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			local_tween.tween_property(btn, "modulate:a", 1.0, 0.25).set_delay(0.04 * i)
 
 	# Кнопка Назад
 	var back = Button.new()
@@ -64,11 +80,18 @@ func _ready():
 	back_style.corner_radius_bottom_right = 18
 	back.add_theme_stylebox_override("normal", back_style)
 	
-	back.pressed.connect(func(): get_tree().change_scene_to_file("res://Scenes/menu.tscn"))
+	back.pressed.connect(Callable(self, "_on_back_pressed"))
 	vbox.add_child(back)
 
-func _on_level_pressed(level: int):
+func _on_back_pressed() -> void:
+	var stm = get_node_or_null("/root/SceneTransitionManager")
+	if stm != null:
+		await stm.change_scene_to_file("res://Scenes/menu.tscn")
+
+func _on_level_pressed(level: int) -> void:
 	if level > GameManager.unlocked_level:
 		return
 	GameManager.current_level = level
-	get_tree().change_scene_to_file("res://Scenes/level.tscn")
+	var stm = get_node_or_null("/root/SceneTransitionManager")
+	if stm != null:
+		await stm.change_scene_to_file("res://Scenes/level.tscn")

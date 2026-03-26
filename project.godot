@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*uid://b25kbbu3f2mxq"
+UIManager="res://shared/ui_manager.gd"
+SceneTransitionManager="res://shared/scene_transition_manager.gd"
 
 [display]
 

@@ -18,6 +18,10 @@ func _ready():
 	# Запускаем анимацию появления
 	animate_appearance()
 
+	# Ensure settings button works even if scene connections are missing.
+	if not settings_button.pressed.is_connected(_on_settings_pressed):
+		settings_button.pressed.connect(_on_settings_pressed)
+
 # ====================== ЗАКРУГЛЁННЫЕ КНОПКИ ======================
 func setup_buttons():
 	round_button($ButtonsVBox/PlayButton, Color("#00B5A3"), true)   # главная кнопка
@@ -73,19 +77,33 @@ func animate_appearance():
 
 # ====================== НАЖАТИЯ КНОПОК ======================
 func _on_play_pressed():
+	# Fresh run.
+	GameManager.current_level = 1
+	GameManager.unlocked_level = 1
+	GameManager.score = 0
+	GameManager.last_result = false
+	GameManager.last_explanation = ""
+	GameManager.showed_welcome = false
+
 	press_animation($ButtonsVBox/PlayButton)
 	await get_tree().create_timer(0.15).timeout
-	get_tree().change_scene_to_file("res://Scenes/start_level.tscn")
+	var stm = get_node_or_null("/root/SceneTransitionManager")
+	if stm != null:
+		await stm.change_scene_to_file("res://Scenes/start_level.tscn")
 
 func _on_about_pressed():
 	press_animation($ButtonsVBox/AboutButton)
 	await get_tree().create_timer(0.15).timeout
-	print("Открыт экран 'Об игре'")
+	var stm = get_node_or_null("/root/SceneTransitionManager")
+	if stm != null:
+		await stm.change_scene_to_file("res://Scenes/about.tscn")
 
 func _on_settings_pressed():
 	press_animation(settings_button)
 	await get_tree().create_timer(0.15).timeout
-	print("Открыты настройки")
+	var stm = get_node_or_null("/root/SceneTransitionManager")
+	if stm != null:
+		await stm.change_scene_to_file("res://Scenes/settings.tscn")
 
 # Анимация нажатия кнопки
 func press_animation(node):

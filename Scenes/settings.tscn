@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://nbnvm72ivlco"]
+
+[ext_resource type="Script" uid="uid://d0ggjhvfhoxfc" path="res://Scripts/settings.gd" id="1_st"]
+[ext_resource type="Texture2D" uid="uid://csh2shy0krswi" path="res://Assets/city_background.jpg" id="2_bg"]
+
+[node name="Control" type="Control" unique_id=1733669750]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_st")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1021660897]
+modulate = Color(0.5400934, 0.4308048, 0.6178711, 1)
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("2_bg")
+stretch_mode = 1
+
+[node name="Header" type="Label" parent="." unique_id=2123635858]
+layout_mode = 0
+offset_right = 1083.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 90
+text = "Настройки"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="." unique_id=69676521]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 420.0
+offset_right = 960.0
+offset_bottom = 1350.0
+
+[node name="TextSpeedLabel" type="Label" parent="Panel" unique_id=778303042]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 780.0
+offset_bottom = 140.0
+theme_override_font_sizes/font_size = 60
+text = "Скорость текста"
+horizontal_alignment = 1
+
+[node name="TextSpeedValue" type="Label" parent="Panel" unique_id=48574311]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 160.0
+offset_right = 780.0
+offset_bottom = 220.0
+theme_override_font_sizes/font_size = 60
+text = "35"
+horizontal_alignment = 1
+
+[node name="TextSpeedSlider" type="HSlider" parent="Panel" unique_id=951030451]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 260.0
+offset_right = 780.0
+offset_bottom = 320.0
+min_value = 20.0
+max_value = 70.0
+value = 20.0
+
+[node name="ReduceAnimations" type="CheckBox" parent="Panel" unique_id=690104053]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 420.0
+offset_right = 780.0
+offset_bottom = 520.0
+theme_override_font_sizes/font_size = 50
+text = "Меньше анимаций"
+
+[node name="BackButton" type="Button" parent="." unique_id=2001002569]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 1640.0
+offset_right = 884.0
+offset_bottom = 1740.0
+theme_override_font_sizes/font_size = 70
+text = "Назад"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_pressed"]
