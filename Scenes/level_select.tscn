@@ -20,21 +20,31 @@ expand_mode = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=934457988]
 layout_mode = 0
-offset_left = 81.0
-offset_top = 233.0
-offset_right = 1012.0
-offset_bottom = 1798.0
+offset_left = 80.0
+offset_top = 250.0
+offset_right = 1000.0
+offset_bottom = 1630.0
 
 [node name="LevelsVBox" type="VBoxContainer" parent="ScrollContainer" unique_id=521769082]
 layout_mode = 2
-theme_override_constants/separation = 70
-alignment = 1
+theme_override_constants/separation = 28
 
 [node name="Header" type="Label" parent="." unique_id=1076604708]
 layout_mode = 0
 offset_right = 1073.0
 offset_bottom = 236.0
 theme_override_font_sizes/font_size = 90
-text = "Выбор Уровня"
+text = "Выбор уровня"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 1700.0
+offset_right = 890.0
+offset_bottom = 1820.0
+theme_override_font_sizes/font_size = 60
+text = "Назад"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_pressed"]

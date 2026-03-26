@@ -1,16 +1,26 @@
 extends Control
+const PIXEL_UI = preload("res://shared/pixel_ui.gd")
 
 @onready var title_container = $TitleContainer
 @onready var buttons_vbox = $ButtonsVBox
-@onready var aurora_icon = $AuroraIcon
+@onready var levels_button = $ButtonsVBox/LevelsButton
 @onready var settings_button = $SettingsButton
+@onready var about_button = $AboutButton
+@onready var clouds = $Clouds
+@onready var cloud_left = $Clouds/CloudLeft
+@onready var cloud_center = $Clouds/CloudCenter
+@onready var cloud_right = $Clouds/CloudRight
+@onready var cloud_bottom_a = $Clouds/CloudBottomA
+@onready var cloud_bottom_b = $Clouds/CloudBottomB
+@onready var cloud_top_ribbon = $Clouds/CloudTopRibbon
 
 func _ready():
 	# Скрываем всё перед анимацией
 	title_container.modulate.a = 0
 	buttons_vbox.modulate.a = 0
-	aurora_icon.modulate.a = 0
 	settings_button.modulate.a = 0
+	about_button.modulate.a = 0
+	clouds.modulate.a = 1
 	
 	# Применяем красивые закруглённые стили к кнопкам
 	setup_buttons()
@@ -19,43 +29,33 @@ func _ready():
 	animate_appearance()
 
 	# Ensure settings button works even if scene connections are missing.
-	if not settings_button.pressed.is_connected(_on_settings_pressed):
-		settings_button.pressed.connect(_on_settings_pressed)
+	var settings_cb = Callable(self, "_on_settings_pressed")
+	var about_cb = Callable(self, "_on_about_pressed")
+	if not settings_button.pressed.is_connected(settings_cb):
+		settings_button.pressed.connect(settings_cb)
+	if not about_button.pressed.is_connected(about_cb):
+		about_button.pressed.connect(about_cb)
 
 # ====================== ЗАКРУГЛЁННЫЕ КНОПКИ ======================
 func setup_buttons():
-	round_button($ButtonsVBox/PlayButton, Color("#00B5A3"), true)   # главная кнопка
-	round_button($ButtonsVBox/AboutButton, Color(1, 1, 1, 0.95), false)
+	PIXEL_UI.style_button($ButtonsVBox/PlayButton, true, false)
+	PIXEL_UI.style_button(levels_button, false, false)
 
-func round_button(button: Button, base_color: Color, is_primary: bool):
-	# Normal стиль
-	var normal = StyleBoxFlat.new()
-	normal.bg_color = base_color
-	normal.corner_radius_top_left = 32
-	normal.corner_radius_top_right = 32
-	normal.corner_radius_bottom_left = 32
-	normal.corner_radius_bottom_right = 32
-	normal.shadow_color = Color(0, 0, 0, 0.25)
-	normal.shadow_size = 12
-	normal.shadow_offset = Vector2(0, 8)
-	
-	if not is_primary:
-		normal.border_width_left = 4
-		normal.border_width_right = 4
-		normal.border_width_bottom = 4
-		normal.border_color = Color("#00B5A3")
-	
-	button.add_theme_stylebox_override("normal", normal)
-	
-	# Hover стиль
-	var hover = normal.duplicate()
-	hover.bg_color = base_color.lightened(0.15) if is_primary else base_color.darkened(0.05)
-	button.add_theme_stylebox_override("hover", hover)
-	
-	# Pressed стиль
-	var pressed_style = normal.duplicate()
-	pressed_style.bg_color = base_color.darkened(0.18)
-	button.add_theme_stylebox_override("pressed", pressed_style)
+func _start_cloud_drift() -> void:
+	var t = create_tween()
+	t.set_loops()
+	t.tween_property(cloud_left, "position:x", cloud_left.position.x + 90.0, 3.8)
+	t.parallel().tween_property(cloud_right, "position:x", cloud_right.position.x - 110.0, 4.2)
+	t.parallel().tween_property(cloud_center, "position:x", cloud_center.position.x + 60.0, 4.0)
+	t.parallel().tween_property(cloud_bottom_a, "position:x", cloud_bottom_a.position.x + 70.0, 4.6)
+	t.parallel().tween_property(cloud_bottom_b, "position:x", cloud_bottom_b.position.x - 80.0, 4.6)
+	t.parallel().tween_property(cloud_top_ribbon, "position:y", cloud_top_ribbon.position.y + 12.0, 3.0)
+	t.tween_property(cloud_left, "position:x", cloud_left.position.x, 0.1)
+	t.parallel().tween_property(cloud_right, "position:x", cloud_right.position.x, 0.1)
+	t.parallel().tween_property(cloud_center, "position:x", cloud_center.position.x, 0.1)
+	t.parallel().tween_property(cloud_bottom_a, "position:x", cloud_bottom_a.position.x, 0.1)
+	t.parallel().tween_property(cloud_bottom_b, "position:x", cloud_bottom_b.position.x, 0.1)
+	t.parallel().tween_property(cloud_top_ribbon, "position:y", cloud_top_ribbon.position.y, 0.1)
 
 # ====================== АНИМАЦИЯ ПОЯВЛЕНИЯ ======================
 func animate_appearance():
@@ -66,14 +66,24 @@ func animate_appearance():
 	tween.parallel().tween_property(title_container, "position:y", title_container.position.y - 40, 1.0)\
 		 .as_relative().set_trans(Tween.TRANS_BACK)
 	
-	# Иконка Авроры
-	tween.tween_property(aurora_icon, "modulate:a", 1.0, 0.6).from(0.0)
-	
 	# Кнопки
 	tween.tween_property(buttons_vbox, "modulate:a", 1.0, 0.8).from(0.0)
 	
 	# Шестерёнка
 	tween.tween_property(settings_button, "modulate:a", 1.0, 0.5).from(0.0)
+	tween.parallel().tween_property(about_button, "modulate:a", 1.0, 0.5).from(0.0)
+	_start_cloud_drift()
+
+func _animate_clouds_open() -> void:
+	var t = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property(cloud_left, "position:x", cloud_left.position.x - 620, 0.45)
+	t.parallel().tween_property(cloud_right, "position:x", cloud_right.position.x + 620, 0.45)
+	t.parallel().tween_property(cloud_center, "position:y", cloud_center.position.y - 520, 0.5)
+	t.parallel().tween_property(cloud_bottom_a, "position:y", cloud_bottom_a.position.y + 620, 0.48)
+	t.parallel().tween_property(cloud_bottom_b, "position:y", cloud_bottom_b.position.y + 620, 0.48)
+	t.parallel().tween_property(cloud_top_ribbon, "position:y", cloud_top_ribbon.position.y - 260, 0.4)
+	t.parallel().tween_property(clouds, "modulate:a", 0.0, 0.45)
+	await t.finished
 
 # ====================== НАЖАТИЯ КНОПОК ======================
 func _on_play_pressed():
@@ -87,16 +97,10 @@ func _on_play_pressed():
 
 	press_animation($ButtonsVBox/PlayButton)
 	await get_tree().create_timer(0.15).timeout
+	await _animate_clouds_open()
 	var stm = get_node_or_null("/root/SceneTransitionManager")
 	if stm != null:
 		await stm.change_scene_to_file("res://Scenes/start_level.tscn")
-
-func _on_about_pressed():
-	press_animation($ButtonsVBox/AboutButton)
-	await get_tree().create_timer(0.15).timeout
-	var stm = get_node_or_null("/root/SceneTransitionManager")
-	if stm != null:
-		await stm.change_scene_to_file("res://Scenes/about.tscn")
 
 func _on_settings_pressed():
 	press_animation(settings_button)
@@ -104,6 +108,20 @@ func _on_settings_pressed():
 	var stm = get_node_or_null("/root/SceneTransitionManager")
 	if stm != null:
 		await stm.change_scene_to_file("res://Scenes/settings.tscn")
+
+func _on_levels_pressed():
+	press_animation(levels_button)
+	await get_tree().create_timer(0.1).timeout
+	var stm = get_node_or_null("/root/SceneTransitionManager")
+	if stm != null:
+		await stm.change_scene_to_file("res://Scenes/level_select.tscn")
+
+func _on_about_pressed():
+	press_animation(about_button)
+	await get_tree().create_timer(0.1).timeout
+	var stm = get_node_or_null("/root/SceneTransitionManager")
+	if stm != null:
+		await stm.change_scene_to_file("res://Scenes/about.tscn")
 
 # Анимация нажатия кнопки
 func press_animation(node):

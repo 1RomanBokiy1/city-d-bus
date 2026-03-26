@@ -1,5 +1,6 @@
 # final.gd
 extends BaseScreen
+const PIXEL_UI = preload("res://shared/pixel_ui.gd")
 
 @onready var text_node: Label = $Panel/Text
 @onready var menu_button: Button = $Menu
@@ -26,24 +27,26 @@ func _ready() -> void:
 	# Упрощённая “печать” для Label (без RichTextLabel).
 	if GameManager.reduce_animations:
 		text_node.text = final_text
+		PIXEL_UI.style_button(menu_button, true, false)
 		menu_button.disabled = false
 		return
 
 	text_node.text = ""
-	var full_len := final_text.length()
-	var cps := max(10.0, GameManager.text_cps)
-	var shown := 0
-	var elapsed := 0.0
+	var full_len: int = final_text.length()
+	var cps: float = max(10.0, GameManager.text_cps)      # ← явно float
+	var shown: int = 0
+	var elapsed: float = 0.0
 
 	while shown < full_len:
 		await get_tree().process_frame
 		elapsed += get_process_delta_time()
-		var target := min(full_len, int(elapsed * cps))
+		var target: int = min(full_len, int(elapsed * cps))   # ← явно int
 		if target > shown:
 			shown = target
 			text_node.text = final_text.substr(0, shown)
 
 	text_node.text = final_text
+	PIXEL_UI.style_button(menu_button, true, false)
 	menu_button.disabled = false
 
 func _on_menu_pressed() -> void:

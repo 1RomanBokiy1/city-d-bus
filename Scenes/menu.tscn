@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bur1ajbgtqrft" path="res://Scripts/menu.gd" id="1_1rerr"]
 [ext_resource type="Texture2D" uid="uid://csh2shy0krswi" path="res://Assets/city_background.jpg" id="2_xhh6f"]
+[ext_resource type="Texture2D" uid="uid://dnfox0ngtrpoh" path="res://icon.svg" id="3_cayip"]
 
-[node name="Control" type="Control" unique_id=828672909]
+[node name="Control2" type="Control" unique_id=828672909]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -18,35 +19,91 @@ offset_bottom = 1920.0
 texture = ExtResource("2_xhh6f")
 stretch_mode = 1
 
-[node name="TopBar" type="TextureRect" parent="." unique_id=55869470]
-layout_mode = 0
-offset_right = 1082.0
-offset_bottom = 366.0
+[node name="Clouds" type="Control" parent="." unique_id=695280112]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="OMPLabel" type="Label" parent="TopBar" unique_id=609608857]
+[node name="CloudLeft" type="ColorRect" parent="Clouds" unique_id=729472629]
 layout_mode = 0
-offset_left = 92.0
-offset_top = 28.999998
-offset_right = 1068.0
-offset_bottom = 234.0
-theme_override_font_sizes/font_size = 150
+offset_left = -200.0
+offset_top = 130.0
+offset_right = 540.0
+offset_bottom = 470.0
+color = Color(0.89, 0.97, 1, 0.9)
+
+[node name="CloudCenter" type="ColorRect" parent="Clouds" unique_id=1131709385]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 520.0
+offset_right = 930.0
+offset_bottom = 900.0
+color = Color(0.92, 0.98, 1, 0.88)
+
+[node name="CloudRight" type="ColorRect" parent="Clouds" unique_id=1807720351]
+layout_mode = 0
+offset_left = 610.0
+offset_top = 220.0
+offset_right = 1250.0
+offset_bottom = 580.0
+color = Color(0.86, 0.95, 1, 0.9)
+
+[node name="CloudBottomA" type="ColorRect" parent="Clouds" unique_id=275511947]
+layout_mode = 0
+offset_left = -180.0
+offset_top = 1190.0
+offset_right = 520.0
+offset_bottom = 1600.0
+color = Color(0.92, 0.98, 1, 0.9)
+
+[node name="CloudBottomB" type="ColorRect" parent="Clouds" unique_id=1199807933]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 1280.0
+offset_right = 1120.0
+offset_bottom = 1720.0
+color = Color(0.88, 0.97, 1, 0.9)
+
+[node name="CloudTopRibbon" type="ColorRect" parent="Clouds" unique_id=1626958516]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 1120.0
+offset_bottom = 150.0
+color = Color(0.9, 0.97, 1, 0.88)
+
+[node name="TopBar" type="Panel" parent="." unique_id=1366119774]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 30.0
+offset_right = 1028.0
+offset_bottom = 250.0
+
+[node name="OMPLabel" type="Label" parent="TopBar" unique_id=707204807]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 26.0
+offset_right = 952.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 70
 text = "ОМП"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
 
-[node name="PlatformLabel" type="Label" parent="TopBar" unique_id=438525144]
+[node name="PlatformLabel" type="Label" parent="TopBar" unique_id=789271273]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 243.0
-offset_right = 999.9767
-offset_bottom = 365.91678
-scale = Vector2(1, 1.0239993)
-theme_override_font_sizes/font_size = 50
+offset_left = 22.0
+offset_top = 118.0
+offset_right = 952.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 36
 text = "Открытая мобильная платформа"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="TitleContainer" type="VBoxContainer" parent="." unique_id=1689046207]
 layout_mode = 1
@@ -76,7 +133,7 @@ layout_mode = 0
 offset_left = 109.0
 offset_top = 1048.0
 offset_right = 1030.0
-offset_bottom = 1342.0
+offset_bottom = 1310.0
 theme_override_constants/separation = 25
 
 [node name="PlayButton" type="Button" parent="ButtonsVBox" unique_id=1636680174]
@@ -84,15 +141,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "Играть"
 
-[node name="AboutButton" type="Button" parent="ButtonsVBox" unique_id=1885854976]
+[node name="LevelsButton" type="Button" parent="ButtonsVBox" unique_id=741909635]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Об игре"
-
-[node name="AuroraIcon" type="TextureRect" parent="." unique_id=855143626]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+text = "Уровни"
 
 [node name="VersionLabel" type="Label" parent="." unique_id=2103443109]
 layout_mode = 0
@@ -107,9 +159,41 @@ vertical_alignment = 1
 
 [node name="SettingsButton" type="TextureButton" parent="." unique_id=922206132]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 360.0
+offset_top = 1390.0
+offset_right = 486.0
+offset_bottom = 1518.0
+texture_normal = ExtResource("3_cayip")
+
+[node name="SettingsLabel" type="Label" parent="." unique_id=1786230396]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 1520.0
+offset_right = 512.0
+offset_bottom = 1562.0
+theme_override_font_sizes/font_size = 24
+text = "Настройки"
+horizontal_alignment = 1
+
+[node name="AboutButton" type="TextureButton" parent="." unique_id=922206133]
+layout_mode = 0
+offset_left = 596.0
+offset_top = 1390.0
+offset_right = 722.0
+offset_bottom = 1518.0
+texture_normal = ExtResource("3_cayip")
+
+[node name="AboutLabel" type="Label" parent="." unique_id=795994599]
+layout_mode = 0
+offset_left = 572.0
+offset_top = 1520.0
+offset_right = 748.0
+offset_bottom = 1562.0
+theme_override_font_sizes/font_size = 24
+text = "Об игре"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="ButtonsVBox/PlayButton" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="ButtonsVBox/AboutButton" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="ButtonsVBox/LevelsButton" to="." method="_on_levels_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="AboutButton" to="." method="_on_about_pressed"]

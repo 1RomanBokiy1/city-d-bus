@@ -1,5 +1,6 @@
 # explanation.gd
 extends BaseScreen
+const PIXEL_UI = preload("res://shared/pixel_ui.gd")
 
 @onready var header_label: Label = $Header
 @onready var explanation_text: RichTextLabel = $ExplanationText/Text
@@ -16,6 +17,7 @@ func _ready() -> void:
 	intro.tween_property($ExplanationText, "modulate:a", 1.0, 0.25)
 
 	await reveal_text(explanation_text, GameManager.last_explanation, GameManager.text_cps, true)
+	PIXEL_UI.style_button(next_button, true, false)
 	next_button.disabled = false
 
 func _on_next_level_pressed() -> void:

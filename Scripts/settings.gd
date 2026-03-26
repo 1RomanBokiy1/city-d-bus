@@ -1,4 +1,5 @@
 extends BaseScreen
+const PIXEL_UI = preload("res://shared/pixel_ui.gd")
 
 @onready var text_speed_slider: HSlider = $Panel/TextSpeedSlider
 @onready var text_speed_value: Label = $Panel/TextSpeedValue
@@ -14,6 +15,7 @@ func _ready() -> void:
 
 	text_speed_slider.value_changed.connect(Callable(self, "_on_text_speed_changed"))
 	reduce_animations.toggled.connect(Callable(self, "_on_reduce_animations_toggled"))
+	PIXEL_UI.style_button(back_button, true, false)
 
 func _on_text_speed_changed(v: float) -> void:
 	GameManager.text_cps = v
@@ -26,4 +28,3 @@ func _on_back_pressed() -> void:
 	var stm = get_node_or_null("/root/SceneTransitionManager")
 	if stm != null:
 		await stm.change_scene_to_file("res://Scenes/menu.tscn")
-

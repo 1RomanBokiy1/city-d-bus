@@ -1,4 +1,5 @@
 extends BaseScreen
+const PIXEL_UI = preload("res://shared/pixel_ui.gd")
 
 @onready var header: Label = $Header
 @onready var rich_text: RichTextLabel = $ScrollContainer/Panel/Text
@@ -15,6 +16,7 @@ func _ready() -> void:
 
 	# Чуть медленнее на важном тексте.
 	await reveal_text(rich_text, txt, GameManager.text_cps, true)
+	PIXEL_UI.style_button(back_button, true, false)
 	back_button.disabled = false
 
 func _on_back_pressed() -> void:

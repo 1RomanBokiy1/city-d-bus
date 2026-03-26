@@ -22,4 +22,3 @@ func is_paused() -> bool:
 
 func pause_game(pause: bool) -> void:
 	get_tree().paused = pause
-
